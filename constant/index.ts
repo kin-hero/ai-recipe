@@ -1,0 +1,1 @@
+export const NUMBER_OF_RECIPES_PER_USER = 10;
