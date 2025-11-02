@@ -11,7 +11,7 @@ export async function GET() {
 
   // 2. Business logic
   const count = await getRecipeCount(userId);
-  const canGenerateNewRecipe = count <= NUMBER_OF_RECIPES_PER_USER;
+  const canGenerateNewRecipe = count < NUMBER_OF_RECIPES_PER_USER;
 
   // 3. Return Response.json()
   return Response.json({
