@@ -3,8 +3,8 @@ import { TABLES, dynamoDB } from "./dynamodb";
 import { RATE_LIMIT_WINDOW } from "@/constant";
 
 const checkRateLimit = async (userId: string): Promise<boolean> => {
-  const thirtyMinsAgo = Date.now() - RATE_LIMIT_WINDOW;
-  const requestIdStart = `gen#${thirtyMinsAgo}`;
+  const timeDeadline = Date.now() - RATE_LIMIT_WINDOW;
+  const requestIdStart = `gen#${timeDeadline}`;
 
   const response = await dynamoDB.send(
     new QueryCommand({
