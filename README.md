@@ -17,19 +17,19 @@ A production-grade, full-stack AI-powered recipe generation platform built with 
 
 ## Technical Architecture
 
-This project uses a modern, serverless monorepo architecture to ensure cost-effectiveness, maintainability, and optimal performance for a portfolio/showcase application.
+This project uses a serverless monorepo architecture to ensure cost-effectiveness, maintainability, and optimal performance.
 
 ### Tech Stack
 
-| Area               | Technology                                                                 |
-| ------------------ | -------------------------------------------------------------------------- |
+| Area               | Technology                                                                |
+| ------------------ | ------------------------------------------------------------------------- |
 | **Frontend**       | Next.js 16 (App Router), React 19, TypeScript (strict mode), Tailwind CSS |
-| **Backend API**    | Next.js API Routes (serverless)                                            |
-| **Database**       | AWS DynamoDB (two tables: Recipes, RateLimit)                              |
-| **Authentication** | Clerk (frontend + backend)                                                 |
-| **AI Provider**    | OpenRouter API (supports multiple LLMs)                                    |
-| **Validation**     | Zod for runtime type safety                                                |
-| **Deployment**     | AWS Amplify (full-stack hosting)                                           |
+| **Backend API**    | Next.js API Routes (serverless)                                           |
+| **Database**       | AWS DynamoDB (two tables: Recipes, RateLimit)                             |
+| **Authentication** | Clerk (frontend + backend)                                                |
+| **AI Provider**    | OpenRouter API (supports multiple LLMs)                                   |
+| **Validation**     | Zod for runtime type safety                                               |
+| **Deployment**     | AWS Amplify (full-stack hosting)                                          |
 
 ### Architecture Diagram
 
@@ -71,23 +71,26 @@ This project uses a modern, serverless monorepo architecture to ensure cost-effe
 ### Key Architectural Decisions
 
 **Monorepo Approach** - Next.js API Routes handle backend logic instead of separate Lambda functions:
-- ✅ Single deployment (AWS Amplify)
-- ✅ Simplified authentication (Clerk middleware)
-- ✅ Shared TypeScript types between frontend/backend
-- ✅ Lower operational overhead (no API Gateway, fewer Lambda cold starts)
-- ✅ Cost-effective for low-traffic portfolio projects (~$1-2/month for 100 users)
+
+- Single deployment (AWS Amplify)
+- Simplified authentication (Clerk middleware)
+- Shared TypeScript types between frontend/backend
+- Lower operational overhead (no API Gateway, fewer Lambda cold starts)
+- Cost-effective for portfolio projects (~$1-2/month)
 
 **DynamoDB Over PostgreSQL**:
-- ✅ Serverless with zero maintenance
-- ✅ Built-in TTL for automatic rate limit cleanup (no cron jobs)
-- ✅ Pay-per-request pricing (ideal for low traffic)
-- ✅ Sub-10ms latency with on-demand scaling
+
+- Serverless with zero maintenance
+- Built-in TTL for automatic rate limit cleanup (no cron jobs)
+- Pay-per-request pricing (ideal for low traffic)
+- Fast response times with on-demand scaling
 
 **Client-Side Filtering**:
-- ✅ Max 10 recipes per user = small dataset
-- ✅ No additional API calls for filtering
-- ✅ Instant UI response
-- ✅ Future-ready for server-side filtering with DynamoDB GSI
+
+- Max 10 recipes per user = small dataset
+- No additional API calls for filtering
+- Instant UI response
+- Can be extended with DynamoDB GSI for server-side filtering
 
 ## Getting Started
 
@@ -169,12 +172,14 @@ aws dynamodb create-table \
 Create two tables in your AWS Console or via AWS CLI:
 
 **Table 1: Recipes**
+
 - Table Name: `ChefGPT-Recipes`
 - Partition Key: `userId` (String)
 - Sort Key: `recipeId` (String)
 - Billing Mode: On-Demand
 
 **Table 2: RateLimit**
+
 - Table Name: `ChefGPT-RateLimit`
 - Partition Key: `userId` (String)
 - Sort Key: `requestId` (String)
@@ -202,21 +207,20 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 
 ## API Endpoints
 
-A brief overview of the main API routes handled by Next.js API Routes.
-
-| Method   | Endpoint                    | Description                          | Auth |
-| -------- | --------------------------- | ------------------------------------ | ---- |
-| `GET`    | `/api/recipes`              | Gets all user's recipes              | Yes  |
-| `GET`    | `/api/recipes/:id`          | Gets a single recipe                 | Yes  |
-| `POST`   | `/api/recipes/generate`     | Generates a new AI recipe            | Yes  |
-| `DELETE` | `/api/recipes/:id`          | Deletes a recipe                     | Yes  |
-| `GET`    | `/api/user/quota`           | Gets user's quota info               | Yes  |
+| Method   | Endpoint                | Description               | Auth |
+| -------- | ----------------------- | ------------------------- | ---- |
+| `GET`    | `/api/recipes`          | Gets all user's recipes   | Yes  |
+| `GET`    | `/api/recipes/:id`      | Gets a single recipe      | Yes  |
+| `POST`   | `/api/recipes/generate` | Generates a new AI recipe | Yes  |
+| `DELETE` | `/api/recipes/:id`      | Deletes a recipe          | Yes  |
+| `GET`    | `/api/user/quota`       | Gets user's quota info    | Yes  |
 
 ### API Request/Response Examples
 
 #### Generate a Recipe
 
 **Request:**
+
 ```bash
 POST /api/recipes/generate
 Content-Type: application/json
@@ -229,6 +233,7 @@ Authorization: Bearer <clerk-session-token>
 ```
 
 **Response (201 Created):**
+
 ```json
 {
   "recipe": {
@@ -242,11 +247,7 @@ Authorization: Bearer <clerk-session-token>
       { "item": "garlic", "amount": "4 cloves" },
       { "item": "olive oil", "amount": "2 tbsp" }
     ],
-    "instructions": [
-      "Preheat your pan over medium heat...",
-      "Season the chicken with salt and pepper...",
-      "Cook until golden brown..."
-    ],
+    "instructions": ["Preheat your pan over medium heat...", "Season the chicken with salt and pepper...", "Cook until golden brown..."],
     "servingSize": 2,
     "prepTime": 10,
     "cookTime": 20,
@@ -257,6 +258,7 @@ Authorization: Bearer <clerk-session-token>
 ```
 
 **Error Response (429 Rate Limited):**
+
 ```json
 {
   "error": "Rate limited. Please wait 30 minutes."
@@ -264,6 +266,7 @@ Authorization: Bearer <clerk-session-token>
 ```
 
 **Error Response (403 Quota Exceeded):**
+
 ```json
 {
   "error": "Recipe quota exceeded"
@@ -327,15 +330,17 @@ ai-recipe/
 2. **Rate Limit**: 1 generation per 30 minutes (prevents API cost abuse)
 
 **Why separate from recipe count?**
+
 - User could delete recipes and spam generate → high OpenRouter API costs
 - Rate limit persists even if user has 0 recipes
 - Uses DynamoDB TTL for automatic cleanup (no cron jobs needed)
 
 **Implementation:**
+
 ```typescript
 // lib/db/rateLimit.ts
 const checkRateLimit = async (userId: string): Promise<boolean> => {
-  const thirtyMinsAgo = Date.now() - RATE_LIMIT_WINDOW;
+  const timeDeadline = Date.now() - env.RATE_LIMIT_WINDOW_MS;
   // Query DynamoDB for any generation requests in last 30 minutes
   // If found, user is rate limited
   // TTL automatically deletes old records
@@ -345,6 +350,7 @@ const checkRateLimit = async (userId: string): Promise<boolean> => {
 ### Authentication Pattern
 
 **Clerk Integration:**
+
 - Frontend: `<ClerkProvider>` wraps app in `app/layout.tsx`
 - Backend: Use `auth()` from `@clerk/nextjs/server` in API routes
 - Middleware: Clerk's middleware protects routes automatically
@@ -385,7 +391,7 @@ export async function POST(req: Request) {
      artifacts:
        baseDirectory: .next
        files:
-         - '**/*'
+         - "**/*"
      cache:
        paths:
          - node_modules/**/*
@@ -404,41 +410,19 @@ export async function POST(req: Request) {
 
 ## Future Enhancements
 
-These are potential additions to showcase additional skills:
-
 - [ ] **Server-side Filtering**: Add DynamoDB GSI for complex queries
-- [ ] **Image Generation**: AI-generated recipe images using DALL-E/Stable Diffusion
-- [ ] **Nutritional Info**: Calculate calories, macros from ingredients
+- [ ] **Image Generation**: AI-generated recipe images
+- [ ] **Nutritional Info**: Calculate calories and macros from ingredients
 - [ ] **Recipe Sharing**: Public recipe URLs with custom slugs
 - [ ] **Shopping List**: Export ingredients to shopping list
 - [ ] **Meal Planning**: Weekly meal plan generator
-- [ ] **Recipe Collections**: User-created recipe collections/cookbooks
-- [ ] **ElasticSearch**: Advanced recipe search functionality
-- [ ] **Caching**: Add Redis/ElastiCache for frequently accessed recipes
 
 ## Development Notes
 
-- This is a **portfolio project** optimized for demonstrating skills, not production scale
-- Prioritizes **code clarity** and **architectural decisions** over premature optimization
-- Documents **why** decisions were made (valuable for interviews)
-- Focus on cost-effective infrastructure (~$1-2/month target)
-
-## Testing
-
-```bash
-# Run unit tests (coming soon)
-npm run test
-
-# Run component tests (coming soon)
-npm run test:components
-
-# Run integration tests (coming soon)
-npm run test:integration
-```
-
-## Contributing
-
-This is a personal portfolio project, but feedback and suggestions are welcome! Please open an issue or submit a pull request.
+- This is a **portfolio project** optimized for demonstrating skills
+- Prioritizes **code clarity** and **architectural decisions**
+- Documents **why** decisions were made
+- Focus on cost-effective infrastructure
 
 ## License
 
@@ -449,6 +433,6 @@ MIT License - feel free to use this project as a reference for your own work.
 - **Portfolio**: [Portfolio](https://www.keanesetiawan.com/)
 - **LinkedIn**: [linkedin](https://www.linkedin.com/in/keane-putra-setiawan/)
 
-
 ---
+
 Built with ❤️ using Next.js, AWS, and OpenRouter AI
