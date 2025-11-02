@@ -23,6 +23,7 @@ export const generateRecipe = async (body: RecipeBodyRequest): Promise<AIGenerat
         Return ONLY valid JSON (no markdown, no code blocks) with this structure:
         {
           "title": "Recipe Name",
+          "description": "Description of the recipe"
           "cuisine": "${cuisine}",
           "ingredients": [{"item": "ingredient name", "amount": "measurement"}],
           "instructions": ["step 1", "step 2", ...],
