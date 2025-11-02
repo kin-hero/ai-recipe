@@ -1,16 +1,16 @@
 # ChefGPT - AI Recipe Generator
 
-[**View the Live Demo**](https://your-live-demo-url.com) | [**Read the Full Case Study**](https://your-portfolio.com/projects/chefgpt)
+[**View the Live Demo**](https://chefgpt.keanesetiawan.com/) | [**Read the Full Case Study**](https://www.keanesetiawan.com/projects/chefgpt)
 
 A production-grade, full-stack AI-powered recipe generation platform built with Next.js, AWS serverless infrastructure, and OpenRouter AI. Transform your ingredients into culinary magic with intelligent recipe suggestions, complete with detailed instructions, cooking times, and nutritional information.
 
 ## Core Features
 
 - **AI-Powered Recipe Generation:** Generate custom recipes using advanced LLMs via OpenRouter API
-- **Smart Rate Limiting:** 1 recipe generation per 30 minutes with automatic DynamoDB TTL cleanup
+- **Smart Rate Limiting:** 1 recipe generation per 10 minutes with automatic DynamoDB TTL cleanup
 - **Recipe Quota Management:** Maximum 10 saved recipes per user to optimize storage costs
 - **Secure Authentication:** User sign-up, sign-in, and session management using Clerk
-- **Full CRUD Functionality:** Create, read, update, and delete recipes
+- **Recipe Functionality:** Create, read, delete recipes
 - **Client-Side Filtering:** Fast cuisine-based filtering without additional API calls
 - **Real-time Quota Display:** Live updates showing remaining recipe slots
 - **Responsive Design:** Mobile-first UI with Tailwind CSS and dark mode support
@@ -446,10 +446,9 @@ MIT License - feel free to use this project as a reference for your own work.
 
 ## Contact
 
-- **Portfolio**: [your-portfolio.com](https://your-portfolio.com)
-- **LinkedIn**: [linkedin.com/in/yourname](https://linkedin.com/in/yourname)
-- **Email**: your.email@example.com
+- **Portfolio**: [Portfolio](https://www.keanesetiawan.com/)
+- **LinkedIn**: [linkedin](https://www.linkedin.com/in/keane-putra-setiawan/)
+
 
 ---
-
 Built with ❤️ using Next.js, AWS, and OpenRouter AI
