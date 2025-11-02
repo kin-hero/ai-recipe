@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
 type RecipeRouteParams = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function GET(req: NextRequest, { params }: RecipeRouteParams) {
