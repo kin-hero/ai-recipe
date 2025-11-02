@@ -24,4 +24,6 @@ const recipeBodyRequestSchema = z.object({
   cuisine: z.string().min(1).max(25),
 });
 
-export { recipeSchema, recipeBodyRequestSchema };
+const aiRecipeSchema = recipeSchema.omit({ userId: true, recipeId: true, createdAt: true });
+
+export { recipeSchema, recipeBodyRequestSchema, aiRecipeSchema };
