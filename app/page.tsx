@@ -1,7 +1,16 @@
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+
+  // Redirect authenticated users to dashboard
+  if (userId) {
+    redirect("/recipes");
+  }
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -72,6 +81,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
