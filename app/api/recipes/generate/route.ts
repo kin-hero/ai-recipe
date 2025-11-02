@@ -5,7 +5,7 @@ import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { getRecipeCount } from "@/lib/db/recipe";
 import { checkRateLimit, generateRecord } from "@/lib/db/rateLimit";
 import { generateRecipe } from "@/lib/ai/openrouter";
-import { NUMBER_OF_RECIPES_PER_USER } from "@/constant";
+import { env } from "@/config/env";
 import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req: Request) {
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     // 3. Check recipe quota
     const count = await getRecipeCount(userId);
-    if (count >= NUMBER_OF_RECIPES_PER_USER) {
+    if (count >= env.MAX_RECIPES_PER_USER) {
       return Response.json({ error: "Recipe quota exceeded" }, { status: 403 });
     }
 
