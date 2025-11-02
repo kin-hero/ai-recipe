@@ -2,7 +2,7 @@
 
 [**View the Live Demo**](https://chefgpt.keanesetiawan.com/) | [**Read the Full Case Study**](https://www.keanesetiawan.com/projects/chefgpt)
 
-A production-grade, full-stack AI-powered recipe generation platform built with Next.js, AWS serverless infrastructure, and OpenRouter AI. Transform your ingredients into culinary magic with intelligent recipe suggestions, complete with detailed instructions, cooking times, and nutritional information.
+A production-grade, full-stack AI-powered recipe generation platform built with Next.js, AWS serverless infrastructure, and OpenRouter AI. Transform your ingredients into culinary magic with intelligent recipe suggestions, complete with detailed instructions, cooking times.
 
 ## Core Features
 
