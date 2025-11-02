@@ -1,7 +1,8 @@
 export const env = {
-  AWS_REGION: process.env.AWS_REGION || "us-east-1",
-  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID || "",
-  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY || "",
+  // AWS credentials (renamed to avoid Amplify reserved prefix)
+  AWS_REGION: process.env.REGION || process.env.AWS_REGION || "us-east-1",
+  AWS_ACCESS_KEY_ID: process.env.ACCESS_KEY_ID || process.env.AWS_ACCESS_KEY_ID || "",
+  AWS_SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY || process.env.AWS_SECRET_ACCESS_KEY || "",
   DYNAMODB_ENDPOINT: process.env.DYNAMODB_ENDPOINT || "http://localhost:8000",
   RECIPE_TABLE_NAME: process.env.RECIPE_TABLE_NAME || "ChefGPT-Recipes-Local",
   RATE_LIMIT_TABLE_NAME: process.env.RATE_LIMIT_TABLE_NAME || "ChefGPT-RateLimit-Local",
