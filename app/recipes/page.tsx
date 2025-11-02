@@ -17,22 +17,17 @@ export default async function RecipesDashboard() {
       {/* Header */}
       <header className="px-6 py-4 border-b border-card">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/recipes" className="flex items-center gap-2">
             <span className="text-primary text-2xl">🔥</span>
             <span className="text-xl font-bold">ChefGPT</span>
-          </div>
+          </Link>
 
-          <nav className="flex items-center gap-6">
-            <Link href="/recipes" className="text-foreground font-medium">
-              Dashboard
-            </Link>
-            <Link
-              href="/recipes/create"
-              className="px-6 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition"
-            >
-              Create Recipe
-            </Link>
-          </nav>
+          <Link
+            href="/recipes/create"
+            className="px-4 sm:px-6 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition text-sm sm:text-base"
+          >
+            Create Recipe
+          </Link>
         </div>
       </header>
 
