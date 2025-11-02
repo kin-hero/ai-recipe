@@ -72,25 +72,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-12 border-t border-card mt-20">
-        <div className="max-w-7xl mx-auto flex justify-center gap-8 text-muted">
-          <Link href="#" className="hover:text-foreground transition">
-            About Us
-          </Link>
-          <Link href="#" className="hover:text-foreground transition">
-            Contact
-          </Link>
-          <Link href="#" className="hover:text-foreground transition">
-            Terms of Service
-          </Link>
-          <Link href="#" className="hover:text-foreground transition">
-            Privacy Policy
-          </Link>
-        </div>
-        <p className="text-center text-muted mt-6">© 2024 ChefGPT. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
