@@ -22,7 +22,12 @@ const client = new DynamoDBClient({
 });
 
 // Create DocumentClient for easier JavaScript object handling
-export const dynamoDB = DynamoDBDocumentClient.from(client);
+export const dynamoDB = DynamoDBDocumentClient.from(client, {
+  marshallOptions: {
+    convertClassInstanceToMap: true,
+    removeUndefinedValues: true,
+  },
+});
 
 // Table names (from centralized config)
 export const TABLES = {
