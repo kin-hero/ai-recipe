@@ -8,6 +8,7 @@ const ingredientSchema = z.object({
 const recipeSchema = z.object({
   userId: z.string().min(1),
   recipeId: z.uuid({ version: "v4" }),
+  description: z.string().min(1).max(500),
   title: z.string().min(1).max(100),
   cuisine: z.string().min(1).max(100),
   ingredients: z.array(ingredientSchema).min(1).max(10),
@@ -24,4 +25,6 @@ const recipeBodyRequestSchema = z.object({
   cuisine: z.string().min(1).max(25),
 });
 
-export { recipeSchema, recipeBodyRequestSchema };
+const aiRecipeSchema = recipeSchema.omit({ userId: true, recipeId: true, createdAt: true });
+
+export { recipeSchema, recipeBodyRequestSchema, aiRecipeSchema };
