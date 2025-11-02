@@ -8,13 +8,13 @@ import Spinner from "@/components/Spinner";
 
 const CUISINES = [
   { name: "Any", icon: "🌍" },
-  { name: "Italian", icon: "🍝" },
-  { name: "Mexican", icon: "🌮" },
-  { name: "American", icon: "🍔" },
-  { name: "Japanese", icon: "🍣" },
-  { name: "Chinese", icon: "🥢" },
-  { name: "Indian", icon: "🍛" },
-  { name: "French", icon: "🥐" },
+  { name: "Italian", icon: "🇮🇹" },
+  { name: "Mexican", icon: "🇲🇽" },
+  { name: "American", icon: "🇺🇸" },
+  { name: "Japanese", icon: "🇯🇵" },
+  { name: "Chinese", icon: "🇨🇳" },
+  { name: "Indian", icon: "🇮🇳" },
+  { name: "French", icon: "🇫🇷" },
 ];
 
 export default function CreateRecipePage() {
