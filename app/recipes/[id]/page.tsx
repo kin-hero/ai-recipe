@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { RecipeResponse } from "@/types/recipe";
 import Spinner from "@/components/Spinner";
+import DeleteModal from "@/components/DeleteModal";
 
 type RecipeRouteParams = {
   params: Promise<{ id: string }>;
@@ -17,6 +18,8 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
   const [recipe, setRecipe] = useState<RecipeResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Unwrap params Promise
   const { id } = use(params);
@@ -57,6 +60,29 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
 
     fetchRecipe();
   }, [userId, id]);
+
+  const handleDelete = async () => {
+    if (!id) return;
+
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/recipes/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete recipe");
+      }
+
+      // Redirect to recipes page after successful deletion
+      router.push("/recipes");
+    } catch (err) {
+      console.error("Failed to delete recipe:", err);
+      setError("Failed to delete recipe. Please try again.");
+      setIsDeleting(false);
+      setIsDeleteModalOpen(false);
+    }
+  };
 
   if (!isLoaded || !userId) {
     return null;
@@ -175,7 +201,7 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
               <div className="space-y-5">
                 {recipe.instructions.map((instruction, index) => (
                   <div key={index} className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-base">{index + 1}</span>
+                    <span className="shrink-0 w-9 h-9 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-base">{index + 1}</span>
                     <p className="flex-1 pt-1.5 text-base leading-relaxed text-foreground/90">{instruction}</p>
                   </div>
                 ))}
@@ -198,11 +224,23 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
 
             {/* Delete Button */}
             <div className="flex justify-end">
-              <button className="px-6 py-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-medium transition">Delete Recipe</button>
+              <button onClick={() => setIsDeleteModalOpen(true)} className="px-6 py-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-medium transition">
+                Delete Recipe
+              </button>
             </div>
           </div>
         )}
       </main>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDelete}
+        title="Delete Recipe?"
+        message="Are you sure you want to delete this recipe? This action cannot be undone."
+        isDeleting={isDeleting}
+      />
     </div>
   );
 }
