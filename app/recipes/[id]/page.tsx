@@ -201,7 +201,7 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
               <div className="space-y-5">
                 {recipe.instructions.map((instruction, index) => (
                   <div key={index} className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-base">{index + 1}</span>
+                    <span className="shrink-0 w-9 h-9 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-base">{index + 1}</span>
                     <p className="flex-1 pt-1.5 text-base leading-relaxed text-foreground/90">{instruction}</p>
                   </div>
                 ))}
@@ -224,10 +224,7 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
 
             {/* Delete Button */}
             <div className="flex justify-end">
-              <button
-                onClick={() => setIsDeleteModalOpen(true)}
-                className="px-6 py-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-medium transition"
-              >
+              <button onClick={() => setIsDeleteModalOpen(true)} className="px-6 py-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-medium transition">
                 Delete Recipe
               </button>
             </div>

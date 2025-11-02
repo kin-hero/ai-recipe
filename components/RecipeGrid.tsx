@@ -45,9 +45,7 @@ export default function RecipeGrid() {
     if (selectedCuisine === "All") {
       setFilteredRecipes(recipes);
     } else {
-      setFilteredRecipes(
-        recipes.filter((recipe) => recipe.cuisine.toLowerCase() === selectedCuisine.toLowerCase())
-      );
+      setFilteredRecipes(recipes.filter((recipe) => recipe.cuisine.toLowerCase() === selectedCuisine.toLowerCase()));
     }
   }, [selectedCuisine, recipes]);
 
@@ -67,17 +65,11 @@ export default function RecipeGrid() {
       {/* Page Title */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">My Recipes</h1>
-        <p className="text-muted">
-          {loading ? "Loading..." : `${recipes.length} recipe${recipes.length !== 1 ? "s" : ""} generated`}
-        </p>
+        <p className="text-muted">{loading ? "Loading..." : `${recipes.length} recipe${recipes.length !== 1 ? "s" : ""} generated`}</p>
       </div>
 
       {/* Error State */}
-      {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
-          {error}
-        </div>
-      )}
+      {error && <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">{error}</div>}
 
       {/* Filter Buttons - Only show if we have recipes */}
       {!loading && recipes.length > 0 && (
@@ -86,11 +78,7 @@ export default function RecipeGrid() {
             <button
               key={cuisine}
               onClick={() => setSelectedCuisine(cuisine)}
-              className={`px-4 py-2 rounded-lg font-medium transition ${
-                selectedCuisine === cuisine
-                  ? "bg-primary text-white"
-                  : "bg-card text-muted hover:bg-primary hover:text-white"
-              }`}
+              className={`px-4 py-2 rounded-lg font-medium transition ${selectedCuisine === cuisine ? "bg-primary text-white" : "bg-card text-muted hover:bg-primary hover:text-white"}`}
             >
               {cuisine}
             </button>
@@ -110,17 +98,11 @@ export default function RecipeGrid() {
       {!loading && filteredRecipes.length > 0 && (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredRecipes.map((recipe) => (
-            <Link
-              key={recipe.recipeId}
-              href={`/recipes/${recipe.recipeId}`}
-              className="bg-card rounded-(--radius-lg) p-6 border border-primary/20 hover:border-primary/50 transition cursor-pointer"
-            >
+            <Link key={recipe.recipeId} href={`/recipes/${recipe.recipeId}`} className="bg-card rounded-(--radius-lg) p-6 border border-primary/20 hover:border-primary/50 transition cursor-pointer">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-xl font-bold mb-1">{recipe.title}</h3>
-                  <span className="text-xs text-primary px-2 py-1 rounded-full bg-primary/10">
-                    {recipe.cuisine}
-                  </span>
+                  <span className="text-xs text-primary px-2 py-1 rounded-full bg-primary/10">{recipe.cuisine}</span>
                 </div>
               </div>
               <p className="text-muted text-sm mb-4 line-clamp-2">{recipe.description}</p>
@@ -142,9 +124,7 @@ export default function RecipeGrid() {
           <h2 className="text-2xl font-bold mb-2">No recipes yet</h2>
           <p className="text-muted mb-6">Start creating your first AI-generated recipe!</p>
           <Link href="/recipes/create">
-            <button className="px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition">
-              Create Your First Recipe
-            </button>
+            <button className="px-6 py-3 rounded-lg bg-linear-to-r from-primary to-secondary text-white font-bold hover:shadow-lg hover:shadow-primary/50 transition">Create Your First Recipe</button>
           </Link>
         </div>
       )}
@@ -155,10 +135,7 @@ export default function RecipeGrid() {
           <div className="text-6xl mb-4">🔍</div>
           <h2 className="text-2xl font-bold mb-2">No {selectedCuisine} recipes</h2>
           <p className="text-muted mb-6">Try selecting a different cuisine filter</p>
-          <button
-            onClick={() => setSelectedCuisine("All")}
-            className="px-6 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition"
-          >
+          <button onClick={() => setSelectedCuisine("All")} className="px-6 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition">
             Show All Recipes
           </button>
         </div>
