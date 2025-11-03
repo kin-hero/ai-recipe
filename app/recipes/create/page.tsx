@@ -169,22 +169,24 @@ export default function CreateRecipePage() {
           {/* Ingredients Input */}
           <div className="mb-8">
             <label className="block text-lg font-semibold mb-3">What&apos;s in your pantry?</label>
+            <p className="text-sm text-muted mb-3">💡 Add ingredients one at a time. Type an ingredient and press Enter or click the + button.</p>
             <div className="flex gap-2">
               <input
                 type="text"
                 value={ingredientInput}
                 onChange={(e) => setIngredientInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="e.g., chicken, tomatoes, basil"
+                placeholder="Type one ingredient (e.g., chicken)"
                 disabled={generating || ingredients.length >= 10}
                 className="flex-1 px-4 py-3 bg-background border border-muted/30 rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition"
               />
               <button
                 onClick={handleAddIngredient}
                 disabled={!ingredientInput.trim() || generating || ingredients.length >= 10}
-                className="px-6 py-3 bg-card hover:bg-muted/20 rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg font-bold text-primary transition disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Add ingredient (or press Enter)"
               >
-                +
+                + Add
               </button>
             </div>
             <p className="text-xs text-muted mt-2">{ingredients.length}/10 ingredients added</p>
