@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
+import ChefHatIcon from "@/components/ChefHatIcon";
 
 const CUISINES = [
   { name: "Any", icon: "🌍" },
@@ -127,7 +128,7 @@ export default function CreateRecipePage() {
       <header className="px-6 py-4 border-b border-card">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/recipes" className="flex items-center gap-2">
-            <span className="text-primary text-2xl">🔥</span>
+            <ChefHatIcon className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold">ChefGPT</span>
           </Link>
 
@@ -142,7 +143,9 @@ export default function CreateRecipePage() {
         <div className="bg-card rounded-(--radius-lg) p-8 sm:p-12 border border-primary/20">
           {/* Title Section */}
           <div className="text-center mb-8">
-            <div className="text-5xl mb-4">🔥</div>
+            <div className="flex justify-center mb-4">
+              <ChefHatIcon className="w-16 h-16 text-primary" />
+            </div>
             <h1 className="text-3xl sm:text-4xl font-bold mb-3">Ignite Your Next Recipe</h1>
             <p className="text-muted">Tell us what you have, and our AI chef will whip up something amazing.</p>
           </div>
