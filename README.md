@@ -148,24 +148,16 @@ RATE_LIMIT_WINDOW_MS=1800000  # 30 minutes in milliseconds
 #### Option A: Use Local DynamoDB (Development)
 
 ```bash
-# Install DynamoDB Local using Docker
-docker run -p 8000:8000 amazon/dynamodb-local
+# 1. Start DynamoDB Local
+make up
 
-# Create tables using AWS CLI
-aws dynamodb create-table \
-  --table-name ChefGPT-Recipes-Local \
-  --attribute-definitions AttributeName=userId,AttributeType=S AttributeName=recipeId,AttributeType=S \
-  --key-schema AttributeName=userId,KeyType=HASH AttributeName=recipeId,KeyType=RANGE \
-  --billing-mode PAY_PER_REQUEST \
-  --endpoint-url http://localhost:8000
-
-aws dynamodb create-table \
-  --table-name ChefGPT-RateLimit-Local \
-  --attribute-definitions AttributeName=userId,AttributeType=S AttributeName=requestId,AttributeType=S \
-  --key-schema AttributeName=userId,KeyType=HASH AttributeName=requestId,KeyType=RANGE \
-  --billing-mode PAY_PER_REQUEST \
-  --endpoint-url http://localhost:8000
+# 2. Run the automated setup script (creates both tables with TTL)
+npm run setup-db
 ```
+
+The setup script automatically creates:
+- `ChefGPT-Recipes-Local` table with userId/recipeId keys
+- `ChefGPT-RateLimit-Local` table with userId/requestId keys and TTL enabled
 
 #### Option B: Use AWS DynamoDB (Production)
 
