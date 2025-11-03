@@ -29,10 +29,11 @@ export async function POST(req: Request) {
       return Response.json({ error: "Recipe quota exceeded" }, { status: 403 });
     }
 
-    // 4. Check rate limit (
+    // 4. Check rate limit
     const canGenerate = await checkRateLimit(userId);
+    const rateLimitInMinutes = env.RATE_LIMIT_WINDOW_MS / 1000 / 60;
     if (!canGenerate) {
-      return Response.json({ error: "Rate limited. Please wait 30 minutes." }, { status: 429 });
+      return Response.json({ error: `Rate limited. Please wait ${rateLimitInMinutes} mins before creating a new recipe` }, { status: 429 });
     }
 
     // 5. Generate recipe with AI
