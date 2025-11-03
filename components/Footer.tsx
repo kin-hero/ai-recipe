@@ -3,6 +3,7 @@ import { FaGithub, FaReact, FaAws } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss } from "react-icons/si";
 import { RiTwitterXFill } from "react-icons/ri";
 import { HiDocumentText } from "react-icons/hi";
+import ChefHatIcon from "@/components/ChefHatIcon";
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
           {/* Left: Project Info */}
           <div className="text-center md:text-left">
             <div className="flex items-center gap-2 mb-4 justify-center md:justify-start">
-              <span className="text-primary text-2xl">🔥</span>
+              <ChefHatIcon className="w-8 h-8 text-primary" />
               <span className="text-xl font-bold">ChefGPT</span>
             </div>
             <p className="text-muted text-sm">A modern AI recipe generator. Discover, explore, and create delicious recipes with artificial intelligence.</p>

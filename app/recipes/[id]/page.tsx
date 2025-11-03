@@ -7,6 +7,7 @@ import Link from "next/link";
 import { RecipeResponse } from "@/types/recipe";
 import Spinner from "@/components/Spinner";
 import DeleteModal from "@/components/DeleteModal";
+import ChefHatIcon from "@/components/ChefHatIcon";
 
 type RecipeRouteParams = {
   params: Promise<{ id: string }>;
@@ -101,7 +102,7 @@ export default function RecipeDetailPage({ params }: RecipeRouteParams) {
       <header className="px-6 py-4 border-b border-card">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/recipes" className="flex items-center gap-2">
-            <span className="text-primary text-2xl">🔥</span>
+            <ChefHatIcon className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold">ChefGPT</span>
           </Link>
 

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import RecipeGrid from "@/components/RecipeGrid";
 import Footer from "@/components/Footer";
+import ChefHatIcon from "@/components/ChefHatIcon";
 
 export default async function RecipesDashboard() {
   const { userId } = await auth();
@@ -18,7 +19,7 @@ export default async function RecipesDashboard() {
       <header className="px-6 py-4 border-b border-card">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/recipes" className="flex items-center gap-2">
-            <span className="text-primary text-2xl">🔥</span>
+            <ChefHatIcon className="w-8 h-8 text-primary" />
             <span className="text-xl font-bold">ChefGPT</span>
           </Link>
 
