@@ -33,40 +33,9 @@ This project uses a serverless monorepo architecture to ensure cost-effectivenes
 
 ### Architecture Diagram
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        User Browser                             │
-│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
-│  │   Landing   │  │   Sign In    │  │   Recipe Dashboard   │  │
-│  │     Page    │─▶│   (Clerk)    │─▶│   (List/Create)      │  │
-│  └─────────────┘  └──────────────┘  └──────────────────────┘  │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │
-                                │ HTTPS
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│              Next.js App (AWS Amplify Hosting)                  │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │                   API Routes Layer                        │  │
-│  │  ┌────────────┐  ┌─────────────┐  ┌──────────────────┐  │  │
-│  │  │ /api/      │  │ /api/user/  │  │ /api/recipes/    │  │  │
-│  │  │ recipes/   │  │ quota       │  │ generate         │  │  │
-│  │  │ [id]       │  │             │  │                  │  │  │
-│  │  └────────────┘  └─────────────┘  └──────────────────┘  │  │
-│  └──────────────────────────────────────────────────────────┘  │
-└───────────┬─────────────────┬──────────────────┬───────────────┘
-            │                 │                  │
-            │                 │                  │
-            ▼                 ▼                  ▼
-    ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐
-    │ Clerk Auth   │  │  DynamoDB    │  │  OpenRouter API  │
-    │   Service    │  │              │  │   (AI Models)    │
-    │              │  │ - Recipes    │  │                  │
-    │              │  │ - RateLimit  │  │  - GPT-4         │
-    └──────────────┘  └──────────────┘  │  - Claude        │
-                                         │  - Llama, etc.   │
-                                         └──────────────────┘
-```
+This diagram shows the complete, production-grade system architecture, designed for scalability, resilience, and performance.
+
+![ChefGPT Architecture Diagram](https://personal-portfolio-images.keanesetiawan.com/case-study/architecture-diagram/chefgpt-v2.png)
 
 ### Key Architectural Decisions
 
@@ -156,6 +125,7 @@ npm run setup-db
 ```
 
 The setup script automatically creates:
+
 - `ChefGPT-Recipes-Local` table with userId/recipeId keys
 - `ChefGPT-RateLimit-Local` table with userId/requestId keys and TTL enabled
 
