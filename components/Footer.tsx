@@ -60,16 +60,7 @@ export default function Footer() {
                   href="https://www.keanesetiawan.com/projects/chefgpt"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted hover:text-primary transition hidden md:flex items-center gap-1 text-xs"
-                >
-                  <HiDocumentText className="w-4 h-4" />
-                  Full Case Study
-                </Link>
-                <Link
-                  href="https://www.keanesetiawan.com/projects/chefgpt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted hover:text-primary transition md:hidden flex items-center gap-1 text-xs"
+                  className="text-muted hover:text-primary transition flex items-center gap-1 text-xs"
                 >
                   <HiDocumentText className="w-4 h-4" />
                   Case Study
