@@ -1,6 +1,6 @@
-import Link from "next/link";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import CTAButton from "@/components/CTAButton";
 
 export default function Home() {
   return (
@@ -16,11 +16,7 @@ export default function Home() {
         </h1>
         <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">Generate instant, personalized recipes from the ingredients you already have. Less waste, more taste.</p>
 
-        <Link href="/recipes/create">
-          <button className="px-8 py-4 rounded-lg bg-linear-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-lg hover:shadow-primary/50 transition">
-            Start Cooking with AI
-          </button>
-        </Link>
+        <CTAButton />
       </section>
 
       {/* How It Works Section */}
