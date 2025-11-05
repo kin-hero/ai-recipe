@@ -1,35 +1,11 @@
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import Link from "next/link";
 import Footer from "@/components/Footer";
-import ChefHatIcon from "@/components/ChefHatIcon";
+import Header from "@/components/Header";
+import CTAButton from "@/components/CTAButton";
 
-export default async function Home() {
-  const { userId } = await auth();
-
-  // Redirect authenticated users to dashboard
-  if (userId) {
-    redirect("/recipes");
-  }
+export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <ChefHatIcon className="w-8 h-8 text-primary" />
-          <span className="text-xl font-bold">ChefGPT</span>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <SignInButton mode="modal">
-            <button className="px-6 py-2 rounded-lg text-foreground hover:bg-card transition">Sign In</button>
-          </SignInButton>
-          <SignUpButton mode="modal">
-            <button className="px-6 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium transition">Sign Up</button>
-          </SignUpButton>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="px-6 py-20 max-w-7xl mx-auto text-center">
@@ -40,11 +16,7 @@ export default async function Home() {
         </h1>
         <p className="text-lg text-muted mb-8 max-w-2xl mx-auto">Generate instant, personalized recipes from the ingredients you already have. Less waste, more taste.</p>
 
-        <Link href="/recipes/create">
-          <button className="px-8 py-4 rounded-lg bg-linear-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-lg hover:shadow-primary/50 transition">
-            Start Cooking with AI
-          </button>
-        </Link>
+        <CTAButton />
       </section>
 
       {/* How It Works Section */}
