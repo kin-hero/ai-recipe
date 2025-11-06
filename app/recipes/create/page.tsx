@@ -139,8 +139,8 @@ export default function CreateRecipePage() {
       </header>
 
       {/* Main Content */}
-      <main className="px-6 py-12 max-w-3xl mx-auto">
-        <div className="bg-card rounded-(--radius-lg) p-8 sm:p-12 border border-primary/20">
+      <main className="px-4 sm:px-6 py-12 max-w-3xl mx-auto">
+        <div className="bg-card rounded-(--radius-lg) p-4 sm:p-8 lg:p-12 border border-primary/20">
           {/* Title Section */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
@@ -173,7 +173,7 @@ export default function CreateRecipePage() {
           <div className="mb-8">
             <label className="block text-lg font-semibold mb-3">What&apos;s in your pantry?</label>
             <p className="text-sm text-muted mb-3">💡 Add ingredients one at a time. Type an ingredient and press Enter or click the + button.</p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 value={ingredientInput}
