@@ -52,7 +52,7 @@ export default function Footer() {
             <h3 className="text-sm font-semibold mb-4 text-foreground">Connect</h3>
             <div className="flex flex-col gap-3 items-center md:items-end">
               <p className="text-muted text-sm">Keane Putra Setiawan</p>
-              <p className="text-muted text-xs">Full-Stack Developer</p>
+              <p className="text-muted text-xs">Full-Stack Engineer</p>
               <div className="flex gap-4 mt-2">
                 <Link href="https://github.com/kin-hero/ai-recipe" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition" aria-label="GitHub">
                   <FaGithub className="w-5 h-5" />
