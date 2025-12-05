@@ -15,7 +15,7 @@
     "@aws-sdk/lib-dynamodb": "^3.921.0",
     "@clerk/nextjs": "^6.34.1",
     "@clerk/themes": "^2.4.30",
-    "next": "16.0.1",
+    "next": "^16.0.7",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "^5.5.0",
