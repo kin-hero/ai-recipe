@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import ChefHatIcon from "@/components/ChefHatIcon";
+import { MAX_INGREDIENTS } from "@/lib/constants";
 
 const CUISINES = [
   { name: "Any", icon: "🌍" },
@@ -60,7 +61,7 @@ export default function CreateRecipePage() {
 
   const handleAddIngredient = () => {
     const trimmed = ingredientInput.trim();
-    if (trimmed && !ingredients.includes(trimmed) && ingredients.length < 10) {
+    if (trimmed && !ingredients.includes(trimmed) && ingredients.length < MAX_INGREDIENTS) {
       setIngredients([...ingredients, trimmed]);
       setIngredientInput("");
     }
@@ -180,19 +181,19 @@ export default function CreateRecipePage() {
                 onChange={(e) => setIngredientInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Type one ingredient (e.g., chicken)"
-                disabled={generating || ingredients.length >= 10}
+                disabled={generating || ingredients.length >= MAX_INGREDIENTS}
                 className="flex-1 px-4 py-3 bg-background border border-muted/30 rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-primary transition"
               />
               <button
                 onClick={handleAddIngredient}
-                disabled={!ingredientInput.trim() || generating || ingredients.length >= 10}
+                disabled={!ingredientInput.trim() || generating || ingredients.length >= MAX_INGREDIENTS}
                 className="px-6 py-3 bg-primary/20 hover:bg-primary/30 border border-primary/40 rounded-lg font-bold text-primary transition disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Add ingredient (or press Enter)"
               >
                 + Add
               </button>
             </div>
-            <p className="text-xs text-muted mt-2">{ingredients.length}/10 ingredients added</p>
+            <p className="text-xs text-muted mt-2">{ingredients.length}/{MAX_INGREDIENTS} ingredients added</p>
 
             {/* Ingredient Tags */}
             {ingredients.length > 0 && (
